@@ -4,7 +4,7 @@ import userModel from "../Models/userModel.js";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 const placeOrder = async (req, res) => {
-  const frontend_url ="https://foodhubtest.netlify.app" || process.env.FORNTEND_URL;
+  const frontend_url = "https://foodhubtest.netlify.app" || process.env.FRONTEND_URL;
   try {
     const { userId, items, amount, address } = req.body;
     if (!userId || !items || !amount || !address) {
@@ -72,7 +72,7 @@ const verifyOrder = async (req, res) => {
     console.error("Error verifying order:", error);
   }
 };
-//user order for frontend
+
 const userOrder = async (req, res) => {
   try {
     const orders = await orderModel.find({ userId: req.body.userId });
@@ -81,8 +81,6 @@ const userOrder = async (req, res) => {
     console.error("Error getting user orders:", error);
   }
 };
-
-//listing orders
 
 const listOrders = async (req, res) => {
   try {
@@ -94,7 +92,6 @@ const listOrders = async (req, res) => {
   }
 };
 
-//api for updating order status
 const updateStatus = async (req, res) => {
   try {
     await orderModel.findByIdAndUpdate(req.body.orderId, {
@@ -105,4 +102,5 @@ const updateStatus = async (req, res) => {
     res.json({ success: false, message: "Error updating status" });
   }
 };
+
 export { placeOrder, verifyOrder, userOrder, listOrders, updateStatus };
