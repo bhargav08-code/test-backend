@@ -4,7 +4,7 @@ import userModel from "../Models/userModel.js";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 const placeOrder = async (req, res) => {
-  const frontend_url = "https://foodhubtest.netlify.app";
+  const frontend_url = "https://foodhubtest.netlify.app/";
   try {
     const { userId, items, amount, address } = req.body;
     if (!userId || !items || !amount || !address) {
@@ -46,8 +46,8 @@ const placeOrder = async (req, res) => {
   payment_method_types: ["card"],
   line_items: line_items,
   mode: "payment",
-  success_url: `${frontend_url}/verify?success=true&orderId=${newOrder._id}`,
-  cancel_url: `${frontend_url}/verify?success=false&orderId=${newOrder._id}`,
+  success_url: `${frontend_url}verify?success=true&orderId=${newOrder._id}`,
+  cancel_url: `${frontend_url}verify?success=false&orderId=${newOrder._id}`,
 });
 
     res.json({ success: true, session_url: session.url });
