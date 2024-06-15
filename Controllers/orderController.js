@@ -4,7 +4,7 @@ import userModel from "../Models/userModel.js";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 const placeOrder = async (req, res) => {
-  const frontend_url = "https://foodhubtest.netlify.app" || process.env.FRONTEND_URL;
+  const frontend_url = "https://foodhubtest.netlify.app";
   try {
     const { userId, items, amount, address } = req.body;
     if (!userId || !items || !amount || !address) {
